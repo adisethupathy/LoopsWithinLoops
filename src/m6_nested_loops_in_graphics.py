@@ -11,7 +11,7 @@ import rosegraphics as rg
 
 def main():
     """ Calls the other functions to demonstrate them. """
-    run_test_draw_L()
+    #run_test_draw_L()
     run_test_draw_wall_on_right()
 
 
@@ -80,9 +80,32 @@ def draw_L(window, circle, r, c):
     and m and n are small, positive integers.
     """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
+
+    original_x = circle.center.x
+    original_y = circle.center.y
+
+    x = original_x
+    y = original_y
+    radius = circle.radius
+    color = circle.fill_color
+
+    for k in range(r):
+        if k < (r - 3):
+            mini = 3
+        if k >= (r - 3):
+            mini = c
+        for j in range(mini):
+            new_circle = rg.Circle(rg.Point(x, y), radius)
+            new_circle.fill_color = color
+            new_circle.attach_to(window)
+            window.render(0.1)
+
+            x = x + 2 * radius
+        y = y + 2 * radius
+        x = original_x
 
 
 def run_test_draw_wall_on_right():
@@ -121,9 +144,42 @@ def draw_wall_on_right(rectangle, n, window):
     and n is a small, positive integer.
     """
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
+
+    original_x1 = rectangle.corner_1.x
+    original_x2 = rectangle.corner_2.x
+    original_y1 = rectangle.corner_1.y
+    original_y2 = rectangle.corner_2.y
+
+    y1 = original_y1
+    x1 = original_x1
+    y2 = original_y2
+    x2 = original_x2
+
+    change_x = x2 - x1
+    change_y = y2 - y1
+
+    for j in range(n):
+        for k in range(j + 1):
+            new_corner1 = rg.Point(x1, y1)
+            new_corner2 = rg.Point(x2, y2)
+            new_rectangle = rg.Rectangle(new_corner1, new_corner2)
+            new_rectangle.attach_to(window)
+            window.render(0.1)
+
+            x1 = x1 - change_x
+            x2 = x2 - change_x
+        y1 += change_y
+        y2 += change_y
+        x1 = original_x1
+        x2 = original_x2
+
+
+
+
+
 
 
 # ----------------------------------------------------------------------
